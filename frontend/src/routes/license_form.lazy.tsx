@@ -41,6 +41,13 @@ function LicenseForm() {
   const [birth_month, setBirthMonth] = useState("");
   const [birth_year, setBirthYear] = useState("");
   const [gender, setGender] = useState("");
+
+  const genderMap: Record<string, "Male" | "Female"> = {
+    "Male": "Male",
+    "M": "Male",
+    "Female": "Female",
+    "F": "Female",
+  };
   useEffect(() => {
     if (Object.keys(licenceData).length === 0) return;
     console.log(licenceData);
@@ -53,7 +60,7 @@ function LicenseForm() {
 
     setBirthMonth(`${birthdate.getMonth() + 1}`); // months are 0 indexed
     setBirthYear(birthdate.getFullYear().toString());
-    setGender(licenceData.sex);
+    setGender(genderMap[licenceData.sex] || "X");
   }, [licenceData]);
 
   return (
