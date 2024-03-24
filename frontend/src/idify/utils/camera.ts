@@ -4,7 +4,9 @@ export const enableCamera = (video) => {
       .getUserMedia({ video: true })
       .then((stream) => {
         if (!video) return;
-        video ? (video.current.srcObject = stream) : null;
+        video.current.srcObject = stream;
+        // ref to stream
+        video.current.stream = stream;
       })
       .catch((err) => {
         console.log(err);
@@ -31,4 +33,13 @@ export const getBlob = async (canvas) => {
     canvas.toBlob(resolve, "image/jpeg")
   );
   return blob;
+};
+
+export const disableCamera = (video) => {
+  if (!video || !video.current || !video.current.stream) return;
+  const stream = video.current.stream;
+  stream.getTracks().forEach((track) => {
+    track.stop();
+  });
+  video.current.srcObject = null; // Clear the video source
 };

@@ -1,5 +1,10 @@
 import { useContext, useRef, useState } from "react";
-import { enableCamera, takePhoto, getBlob } from "../utils/camera";
+import {
+  enableCamera,
+  takePhoto,
+  getBlob,
+  disableCamera,
+} from "../utils/camera";
 import { licenceContext } from "../context/IdContext";
 
 export const Idify = () => {
@@ -56,6 +61,7 @@ export const Idify = () => {
                   e.preventDefault();
                   setIsScreenshot(true);
                   takePhoto(videoRef, canvasRef);
+                  disableCamera(videoRef);
                 }}
               >
                 capture

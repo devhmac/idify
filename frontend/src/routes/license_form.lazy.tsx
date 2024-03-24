@@ -18,9 +18,6 @@ function LicenseForm() {
   const { licenceData } = useContext(licenceContext);
 
   // useffect for confirming data coming through to form
-  useEffect(() => {
-    console.log(licenceData);
-  }, [licenceData]);
 
   const genderOptions = [
     {
@@ -38,9 +35,9 @@ function LicenseForm() {
   ];
 
   const license = {
-    first_name: "John",
+    first_name: "",
     middle_name: "",
-    last_name: "Doe",
+    last_name: "",
     address: "123 Fake St, Edmonton",
     license_number: "123456-789",
     birthdate: new Date("1990-01-01"),
@@ -60,6 +57,19 @@ function LicenseForm() {
     license.birthdate.getFullYear().toString()
   );
   const [gender, setGender] = useState(license.gender);
+  useEffect(() => {
+    if (Object.keys(licenceData).length === 0) return;
+    console.log(licenceData);
+
+    const birthdate = new Date(licenceData.date_of_birth);
+
+    setFirstName(licenceData.first_name);
+    setLastName(licenceData.last_name);
+    setBirthDay(birthdate.getDate().toString());
+
+    setBirthMonth(birthdate.getMonth().toString());
+    setBirthYear(birthdate.getFullYear().toString());
+  }, [licenceData]);
 
   return (
     <div>
