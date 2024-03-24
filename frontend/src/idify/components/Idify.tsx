@@ -1,9 +1,9 @@
 import { ComponentRef, useContext, useRef, useState } from "react";
 import {
-  enableCamera,
-  takePhoto,
-  getBlob,
   disableCamera,
+  enableCamera,
+  getBlob,
+  takePhoto,
 } from "../utils/camera";
 import { LicenceContext } from "../context/IdContext";
 
@@ -58,7 +58,13 @@ export const Idify = () => {
 
           <div className="flex flex-row space-between">
             {!isScreenshot && (
-              <button onClick={() => setDialogOpen(false)} type="button">
+              <button
+                onClick={() => {
+                  setDialogOpen(false);
+                  disableCamera(videoRef);
+                }}
+                type="button"
+              >
                 Close
               </button>
             )}

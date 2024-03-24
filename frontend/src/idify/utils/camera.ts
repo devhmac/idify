@@ -1,7 +1,7 @@
 export const enableCamera = (video) => {
   if (navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices
-      .getUserMedia({ video: true })
+      .getUserMedia({ video: { facingMode: "environment" } })
       .then((stream) => {
         if (!video) return;
         video.current.srcObject = stream;
