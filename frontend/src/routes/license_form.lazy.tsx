@@ -41,7 +41,7 @@ function LicenseForm() {
     address: "123 Fake St, Edmonton",
     license_number: "123456-789",
     birthdate: new Date("1990-01-01"),
-    gender: "M",
+    gender: "",
   };
 
   const [first_name, setFirstName] = useState(license.first_name);
@@ -69,6 +69,7 @@ function LicenseForm() {
 
     setBirthMonth(birthdate.getMonth().toString());
     setBirthYear(birthdate.getFullYear().toString());
+    setGender(licenceData.sex);
   }, [licenceData]);
 
   return (
