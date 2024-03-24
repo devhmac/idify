@@ -6,6 +6,7 @@ import {
   takePhoto,
 } from "../utils/camera";
 import { LicenceContext } from "../context/IdContext";
+import { ArrowPathIcon, BoltIcon } from "@heroicons/react/16/solid";
 
 export const Idify = () => {
   const videoRef = useRef(null);
@@ -20,7 +21,7 @@ export const Idify = () => {
   const [success, setSuccess] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="">
       <dialog
         className={dialogOpen
           ? "fixed inset-0 size-full flex justify-center items-center bg-white/30 backdrop-blur-lg z-50"
@@ -155,7 +156,17 @@ export const Idify = () => {
           setDialogOpen(true);
         }}
       >
-        {isSubmitting ? "..." : "IDify"}
+        {isSubmitting
+          ? (
+            <>
+              <ArrowPathIcon className="size-6 animate-spin" />
+            </>
+          )
+          : (
+            <>
+              <BoltIcon className="inline size-6" /> ID-ify
+            </>
+          )}
       </button>
       {error && !success && (
         <p className="text-red-500">There was an error uploading your image</p>

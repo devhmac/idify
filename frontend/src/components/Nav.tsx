@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   ArrowLeftStartOnRectangleIcon,
   ArrowRightStartOnRectangleIcon,
+  BoltIcon,
 } from "@heroicons/react/24/solid";
 
 function classNames(...classes: string[]) {
@@ -47,7 +48,7 @@ function NavContent(props: { onNavigated: () => void }) {
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
             <div className="text-2xl font-semibold leading-6 text-gray-200 pt-16 md:pt-12">
-              ID-ify
+              <BoltIcon className="inline size-6" /> ID-ify
             </div>
             <ul role="list" className="-mx-2 pt-6 space-y-1.5">
               {links.map((link) => (
