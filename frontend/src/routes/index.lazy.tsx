@@ -1,9 +1,9 @@
 import {
-  BoltIcon,
   CameraIcon,
   PencilSquareIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { BoltIcon } from "@heroicons/react/20/solid";
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 export const Route = createLazyFileRoute("/")({

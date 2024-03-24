@@ -4,7 +4,7 @@ import { License } from "../types/license";
 import { useContext, useEffect, useState } from "react";
 import { LicenceContext } from "../idify/context/IdContext";
 import { Idify } from "../idify/components/Idify";
-
+import Header from "../components/Header";
 
 export const Route = createLazyFileRoute("/madi_verify_form")({
   component: MadiVerify,
@@ -25,6 +25,7 @@ function MadiVerify() {
 
   return (
     <div className="bg-white font-acumin">
+      <Header />
       <form className="px-4 md:mx-auto max-w-2xl">
         <img
           className="py-6"
