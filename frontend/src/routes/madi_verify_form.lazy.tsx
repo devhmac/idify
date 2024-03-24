@@ -1,20 +1,27 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import madi_verify_stepper from "../assets/imgs/madi_verify_stepper.png";
-import { SecureFillBtn } from "../components/SecureFillBtn";
 import { License } from "../types/license";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LicenceContext } from "../idify/context/IdContext";
+import { Idify } from "../idify/components/Idify";
+
 
 export const Route = createLazyFileRoute("/madi_verify_form")({
   component: MadiVerify,
 });
 
 function MadiVerify() {
+  const { licenceData } = useContext(LicenceContext);
   const [licenseNumber, setLicenseNumber] = useState({ a: "", b: "" });
 
   const fill = (data: License) => {
     const split = data.license_number.split("-");
     setLicenseNumber({ a: split[0], b: split[1] });
   };
+
+  useEffect(() => {
+    fill(licenceData);
+  }, [licenceData]);
 
   return (
     <div className="bg-white font-acumin">
@@ -33,7 +40,7 @@ function MadiVerify() {
           <span className="font-semibold">EXACTLY</span>{" "}
           as it appears on your ID.
         </p>
-        <SecureFillBtn onDataReceived={fill} />
+        <Idify />
         <div className="py-2">
           <label className="font-semibold text-gray-800">
             No (Licence or ID number)

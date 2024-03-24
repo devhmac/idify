@@ -5,13 +5,13 @@ import {
   getBlob,
   disableCamera,
 } from "../utils/camera";
-import { licenceContext } from "../context/IdContext";
+import { LicenceContext } from "../context/IdContext";
 
 export const Idify = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef<ComponentRef<"canvas">>(null);
 
-  const { setLicenceData } = useContext(licenceContext);
+  const { setLicenceData } = useContext(LicenceContext);
 
   const [isScreenshot, setIsScreenshot] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -23,7 +23,7 @@ export const Idify = () => {
     <div className="flex flex-col items-center justify-center">
       <dialog
         className={dialogOpen
-          ? "fixed inset-0 size-full flex justify-center items-center bg-white/30 backdrop-blur-lg"
+          ? "fixed inset-0 size-full flex justify-center items-center bg-white/30 backdrop-blur-lg z-50"
           : "hidden"}
         open={dialogOpen}
       >

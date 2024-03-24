@@ -2,22 +2,30 @@ import { createContext, useState } from "react";
 import { License } from "../../types/license";
 
 const defaultVal = {
-  licenceData: {},
+  licenceData: {
+    given_name: "",
+    middle_name: "",
+    family_name: "",
+    date_of_birth: "",
+    address: "",
+    license_number: "",
+    sex: "M",
+  } as License,
   setLicenceData: (licenceData: License) => {},
 };
 
-export const licenceContext = createContext(defaultVal);
+export const LicenceContext = createContext(defaultVal);
 
 export const LicenceProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [licenceData, setLicenceData] = useState({});
+  const [licenceData, setLicenceData] = useState(defaultVal.licenceData);
 
   return (
-    <licenceContext.Provider value={{ licenceData, setLicenceData }}>
+    <LicenceContext.Provider value={{ licenceData, setLicenceData }}>
       {children}
-    </licenceContext.Provider>
+    </LicenceContext.Provider>
   );
 };

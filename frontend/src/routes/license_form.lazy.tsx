@@ -4,18 +4,18 @@ import Header from "../components/Header";
 import { Idify } from "../idify/components/Idify";
 import { RadioGroup } from "@headlessui/react";
 
-import { licenceContext } from "../idify/context/IdContext";
+import { LicenceContext } from "../idify/context/IdContext";
 
 export const Route = createLazyFileRoute("/license_form")({
   component: LicenseForm,
 });
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 function LicenseForm() {
-  const { licenceData } = useContext(licenceContext);
+  const { licenceData } = useContext(LicenceContext);
 
   // useffect for confirming data coming through to form
 
@@ -34,37 +34,21 @@ function LicenseForm() {
     },
   ];
 
-  const license = {
-    first_name: "",
-    middle_name: "",
-    last_name: "",
-    address: "123 Fake St, Edmonton",
-    license_number: "123456-789",
-    birthdate: new Date("1990-01-01"),
-    gender: "",
-  };
-
-  const [first_name, setFirstName] = useState(license.first_name);
-  const [middle_name, setMiddleName] = useState(license.first_name);
-  const [last_name, setLastName] = useState(license.last_name);
-  const [birth_day, setBirthDay] = useState(
-    license.birthdate.getDate().toString()
-  );
-  const [birth_month, setBirthMonth] = useState(
-    license.birthdate.getMonth().toString()
-  );
-  const [birth_year, setBirthYear] = useState(
-    license.birthdate.getFullYear().toString()
-  );
-  const [gender, setGender] = useState(license.gender);
+  const [given_name, setGivenName] = useState("");
+  const [middle_name, setMiddleName] = useState("");
+  const [family_name, setFamilyName] = useState("");
+  const [birth_day, setBirthDay] = useState("");
+  const [birth_month, setBirthMonth] = useState("");
+  const [birth_year, setBirthYear] = useState("");
+  const [gender, setGender] = useState("M");
   useEffect(() => {
     if (Object.keys(licenceData).length === 0) return;
     console.log(licenceData);
 
     const birthdate = new Date(licenceData.date_of_birth);
 
-    setFirstName(licenceData.first_name);
-    setLastName(licenceData.last_name);
+    setGivenName(licenceData.given_name);
+    setFamilyName(licenceData.family_name);
     setBirthDay(birthdate.getDate().toString());
 
     setBirthMonth(birthdate.getMonth().toString());
@@ -93,9 +77,9 @@ function LicenseForm() {
                 name="first-name"
                 id="first-name"
                 className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={first_name}
+                value={given_name}
                 onChange={(event) => {
-                  setFirstName(event.target.value);
+                  setGivenName(event.target.value);
                 }}
               />
             </div>
@@ -133,9 +117,9 @@ function LicenseForm() {
                 name="last-name"
                 id="last-name"
                 className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={last_name}
+                value={family_name}
                 onChange={(event) => {
-                  setLastName(event.target.value);
+                  setFamilyName(event.target.value);
                 }}
               />
             </div>
@@ -210,9 +194,8 @@ function LicenseForm() {
                         checked
                           ? "bg-indigo-600 text-white hover:bg-indigo-500"
                           : "ring-1 ring-inset ring-gray-300 bg-white text-gray-900 hover:bg-gray-50",
-                        "flex items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1"
-                      )
-                    }
+                        "flex items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1",
+                      )}
                   >
                     <RadioGroup.Label as="span" className="text-center">
                       {option.name}
