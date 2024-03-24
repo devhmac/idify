@@ -22,11 +22,11 @@ function LicenseForm() {
   const genderOptions = [
     {
       name: "M (Male)",
-      value: "M",
+      value: "Male",
     },
     {
       name: "F (Female)",
-      value: "F",
+      value: "Female",
     },
     {
       name: "X (Unspecified)",
@@ -40,15 +40,15 @@ function LicenseForm() {
   const [birth_day, setBirthDay] = useState("");
   const [birth_month, setBirthMonth] = useState("");
   const [birth_year, setBirthYear] = useState("");
-  const [gender, setGender] = useState("M");
+  const [gender, setGender] = useState("");
   useEffect(() => {
     if (Object.keys(licenceData).length === 0) return;
     console.log(licenceData);
 
     const birthdate = new Date(licenceData.date_of_birth);
 
-    setGivenName(licenceData.given_name);
-    setFamilyName(licenceData.family_name);
+    setGivenName(licenceData.first_name);
+    setFamilyName(licenceData.last_name);
     setBirthDay(birthdate.getDate().toString());
 
     setBirthMonth(`${birthdate.getMonth() + 1}`); // months are 0 indexed

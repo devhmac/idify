@@ -3,13 +3,13 @@ import { License } from "../../types/license";
 
 const defaultVal = {
   licenceData: {
-    given_name: "",
+    first_name: "",
     middle_name: "",
-    family_name: "",
+    last_name: "",
     date_of_birth: "",
     address: "",
     license_number: "",
-    sex: "M",
+    sex: "Male",
   } as License,
   setLicenceData: (licenceData: License) => {},
 };

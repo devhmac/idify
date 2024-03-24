@@ -15,12 +15,12 @@ export function SecureFillBtn(props: Props) {
       new Promise<License>((resolve) => {
         setTimeout(() => {
           const data: License = {
-            family_name: "Doe",
-            given_name: "John",
+            last_name: "Doe",
+            first_name: "John",
             address: "123 Main St",
             date_of_birth: "2000-01-01",
             license_number: "123456-123",
-            sex: "M",
+            sex: "Male",
           };
           resolve(data);
         }, 3000); // 3 seconds
