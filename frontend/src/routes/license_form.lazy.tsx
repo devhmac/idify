@@ -60,7 +60,7 @@ function LicenseForm() {
 
     setBirthMonth(`${birthdate.getMonth() + 1}`); // months are 0 indexed
     setBirthYear(birthdate.getFullYear().toString());
-    setGender(genderMap[licenceData.sex] || "X");
+    setGender(genderMap[licenceData.sex!] || "X");
   }, [licenceData]);
 
   return (

@@ -9,7 +9,7 @@ const defaultVal = {
     date_of_birth: "",
     address: "",
     license_number: "",
-    sex: "Male",
+    sex: undefined,
   } as License,
   setLicenceData: (licenceData: License) => {},
 };
