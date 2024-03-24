@@ -24,81 +24,84 @@ export const Idify = () => {
         }
         open={dialogOpen}
       >
-        {/* screenshot not yet taken show capture button */}
+        <div
+          className="fixed inset-0 bg-black/30 flex flex-col justify-center items-center"
+          aria-hidden="true"
+        >
+          {/* screenshot not yet taken show capture button */}
 
-        {isScreenshot === false && dialogOpen && (
-          <video
-            className="h-[480px] w-[640px]"
-            ref={videoRef}
-            autoPlay
-          ></video>
-        )}
-        {isSubmitting ? (
-          <div className=" flex h-[480px] w-[640px] items-center justify-center">
-            <p>Submission Loading...</p>
+          {isScreenshot === false && dialogOpen && (
+            <video
+              className="h-[480px] w-[640px]"
+              ref={videoRef}
+              autoPlay
+            ></video>
+          )}
+          {isSubmitting ? (
+            <div className=" flex h-[480px] w-[640px] items-center justify-center">
+              <p>Submission Loading...</p>
+            </div>
+          ) : (
+            <canvas
+              className={isScreenshot ? "h-[480px] w-[640px]" : "hidden"}
+              ref={canvasRef}
+            ></canvas>
+          )}
+
+          <div className="flex flex-row space-between">
+            {!isScreenshot && (
+              <button
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsScreenshot(true);
+                  takePhoto(videoRef, canvasRef);
+                }}
+              >
+                capture
+              </button>
+            )}
+            {/* screenshot true enable submit button */}
+            {isScreenshot && (
+              <button
+                className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-4"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  setIsScreenshot(false);
+                  setDialogOpen(false);
+                  getBlob(canvasRef).then((blob) => {
+                    // console.log(blob);
+                    if (!blob) return;
+                    const form = new FormData();
+                    form.append("file", blob);
+
+                    fetch(
+                      "https://idify-63022b8d6788.herokuapp.com/upload-image/",
+                      {
+                        method: "POST",
+
+                        body: form,
+                      }
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        setIsSubmitting(false);
+                        setSuccess(true);
+                        setLicenceData(data.data);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                        setIsSubmitting(false);
+                        setError(true);
+                      });
+                  });
+                }}
+              >
+                {isSubmitting ? "..." : "submit"}
+              </button>
+            )}
           </div>
-        ) : (
-          <canvas
-            className={isScreenshot ? "h-[480px] w-[640px]" : "hidden"}
-            ref={canvasRef}
-          ></canvas>
-        )}
-
-        <div className="flex flex-row space-between">
-          {!isScreenshot && (
-            <button
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsScreenshot(true);
-                takePhoto(videoRef, canvasRef);
-              }}
-            >
-              capture
-            </button>
-          )}
-          {/* screenshot true enable submit button */}
-          {isScreenshot && (
-            <button
-              className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-4"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsSubmitting(true);
-                getBlob(canvasRef).then((blob) => {
-                  // console.log(blob);
-                  if (!blob) return;
-                  const form = new FormData();
-                  form.append("file", blob);
-
-                  fetch(
-                    "https://idify-63022b8d6788.herokuapp.com/upload-image/",
-                    {
-                      method: "POST",
-
-                      body: form,
-                    }
-                  )
-                    .then((response) => response.json())
-                    .then((data) => {
-                      setIsSubmitting(false);
-                      setSuccess(true);
-                      setIsScreenshot(false);
-                      setDialogOpen(false);
-                      setLicenceData(data.data);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                      setIsSubmitting(false);
-                      setError(true);
-                      setIsScreenshot(false);
-                      setDialogOpen(false);
-                    });
-                });
-              }}
-            >
-              {isSubmitting ? "..." : "submit"}
-            </button>
-          )}
         </div>
       </dialog>
 
@@ -111,12 +114,13 @@ export const Idify = () => {
           setDialogOpen(true);
         }}
       >
-        IDify
+        {isSubmitting ? "..." : "IDify"}
       </button>
       {error && !success && (
         <p className="text-red-500">There was an error uploading your image</p>
       )}
       {success && <p className="text-green-600">Information Recieved</p>}
+      {isSubmitting && <p className="">Getting your information...</p>}
     </div>
   );
 };
