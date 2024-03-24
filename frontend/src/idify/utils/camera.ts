@@ -14,12 +14,15 @@ export const enableCamera = (video) => {
   }
 };
 
-export const takePhoto = async (video, canvas) => {
-  video = video.current;
-  canvas = canvas.current;
+export const takePhoto = async (videoRef, canvasRef) => {
+  const video = videoRef.current as HTMLVideoElement;
+  const canvas = canvasRef.current as HTMLCanvasElement;
   if (video && canvas) {
     const context = canvas.getContext("2d");
     canvas.style.display = "block";
+    if (!context) return;
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = "high";
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     return;

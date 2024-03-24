@@ -31,30 +31,33 @@ export const Idify = () => {
           className="flex flex-col justify-center items-center"
           aria-hidden="true"
         >
-          {/* screenshot not yet taken show capture button */}
-
-          {isScreenshot === false && dialogOpen && (
-            <video
-              className="rounded-lg h-[480px] w-[640px]"
-              ref={videoRef}
-              autoPlay
-            >
-            </video>
-          )}
-          {isSubmitting
-            ? (
-              <div className=" flex h-[480px] w-[640px] items-center justify-center">
-                <p>Submission Loading...</p>
-              </div>
-            )
-            : (
-              <canvas
-                className={"block h-[480px] w-[640px]"}
-                style={{ display: !isScreenshot ? "none" : "" }}
-                ref={canvasRef}
+          <div className="h-[480px] w-[640px] px-2 overflow-hidden">
+            {/* screenshot not yet taken show capture button */}
+            {isScreenshot === false && dialogOpen && (
+              <video
+                className="rounded-lg size-full"
+                ref={videoRef}
+                autoPlay
               >
-              </canvas>
+              </video>
             )}
+            {isSubmitting
+              ? (
+                <div className=" flex size-full items-center justify-center">
+                  <p>Submission Loading...</p>
+                </div>
+              )
+              : (
+                <canvas
+                  width="1080"
+                  height="1080"
+                  className={"block size-full"}
+                  style={{ display: !isScreenshot ? "none" : "" }}
+                  ref={canvasRef}
+                >
+                </canvas>
+              )}
+          </div>
 
           <div className="flex flex-row space-between">
             {!isScreenshot && (

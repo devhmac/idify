@@ -51,7 +51,7 @@ function LicenseForm() {
     setFamilyName(licenceData.family_name);
     setBirthDay(birthdate.getDate().toString());
 
-    setBirthMonth(birthdate.getMonth().toString());
+    setBirthMonth(`${birthdate.getMonth() + 1}`); // months are 0 indexed
     setBirthYear(birthdate.getFullYear().toString());
     setGender(licenceData.sex);
   }, [licenceData]);
