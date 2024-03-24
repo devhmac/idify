@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { ComponentRef, useContext, useRef, useState } from "react";
 import {
   enableCamera,
   takePhoto,
@@ -9,7 +9,7 @@ import { licenceContext } from "../context/IdContext";
 
 export const Idify = () => {
   const videoRef = useRef(null);
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<ComponentRef<"canvas">>(null);
 
   const { setLicenceData } = useContext(licenceContext);
 
@@ -20,40 +20,48 @@ export const Idify = () => {
   const [success, setSuccess] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto">
+    <div className="flex flex-col items-center justify-center">
       <dialog
-        className={
-          dialogOpen
-            ? "flex flex-col justify-center items-center absolute top-4 bg-zinc-200"
-            : "hidden"
-        }
+        className={dialogOpen
+          ? "fixed inset-0 size-full flex justify-center items-center bg-white/30 backdrop-blur-lg"
+          : "hidden"}
         open={dialogOpen}
       >
         <div
-          className="fixed inset-0 bg-black/30 flex flex-col justify-center items-center"
+          className="flex flex-col justify-center items-center"
           aria-hidden="true"
         >
           {/* screenshot not yet taken show capture button */}
 
           {isScreenshot === false && dialogOpen && (
             <video
-              className="h-[480px] w-[640px]"
+              className="rounded-lg h-[480px] w-[640px]"
               ref={videoRef}
               autoPlay
-            ></video>
+            >
+            </video>
           )}
-          {isSubmitting ? (
-            <div className=" flex h-[480px] w-[640px] items-center justify-center">
-              <p>Submission Loading...</p>
-            </div>
-          ) : (
-            <canvas
-              className={isScreenshot ? "h-[480px] w-[640px]" : "hidden"}
-              ref={canvasRef}
-            ></canvas>
-          )}
+          {isSubmitting
+            ? (
+              <div className=" flex h-[480px] w-[640px] items-center justify-center">
+                <p>Submission Loading...</p>
+              </div>
+            )
+            : (
+              <canvas
+                className={"block h-[480px] w-[640px]"}
+                style={{ display: !isScreenshot ? "none" : "" }}
+                ref={canvasRef}
+              >
+              </canvas>
+            )}
 
           <div className="flex flex-row space-between">
+            {!isScreenshot && (
+              <button onClick={() => setDialogOpen(false)} type="button">
+                Close
+              </button>
+            )}
             {!isScreenshot && (
               <button
                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
@@ -65,6 +73,25 @@ export const Idify = () => {
                 }}
               >
                 capture
+              </button>
+            )}
+
+            {isScreenshot && (
+              <button
+                onClick={() => {
+                  setIsScreenshot(false);
+                  enableCamera(videoRef);
+                  const canvas = canvasRef.current;
+                  canvas?.getContext("2d")?.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height,
+                  );
+                }}
+                type="button"
+              >
+                Take another
               </button>
             )}
             {/* screenshot true enable submit button */}
@@ -88,7 +115,7 @@ export const Idify = () => {
                         method: "POST",
 
                         body: form,
-                      }
+                      },
                     )
                       .then((response) => response.json())
                       .then((data) => {
@@ -116,7 +143,6 @@ export const Idify = () => {
         onClick={(e) => {
           e.preventDefault();
           enableCamera(videoRef);
-
           setDialogOpen(true);
         }}
       >

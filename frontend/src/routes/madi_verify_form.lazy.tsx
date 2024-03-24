@@ -42,13 +42,19 @@ function MadiVerify() {
             <input
               className="rounded w-20 p-2 border border-slate-300"
               type="text"
+              maxLength={6}
               value={licenseNumber.a}
+              onChange={(e) =>
+                setLicenseNumber((o) => ({ ...o, a: e.target.value }))}
             />
             <span className="px-2">-</span>
             <input
               className="rounded w-20 p-2 border border-slate-300"
               type="text"
               value={licenseNumber.b}
+              maxLength={3}
+              onChange={(e) =>
+                setLicenseNumber((o) => ({ ...o, b: e.target.value }))}
             />
           </div>
           <div className="text-xs text-gray-800">

@@ -32,7 +32,7 @@ export const getBlob = async (canvas) => {
   const blob = await new Promise((resolve) =>
     canvas.toBlob(resolve, "image/jpeg")
   );
-  return blob;
+  return blob as Blob;
 };
 
 export const disableCamera = (video) => {
