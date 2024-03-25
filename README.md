@@ -2,7 +2,6 @@
 
 Automatically fillup government forms with your id card.
 
-- Coms https://discord.gg/ZCH3z8bk
 - Site https://idify-govtech.pages.dev/
 - `Api` https://idify-63022b8d6788.herokuapp.com/upload-image/
 
@@ -47,21 +46,21 @@ Sample Response:
 {
   "message": "Image received and processed!",
   "data": {
-    "license_number": "134711-320",
-    "first_name": "Sam",
-    "last_name": "SAMPLE",
-    "street_address": "24 My Place Street",
-    "post_code": "T5J 2M6",
-    "city": "Anywhere",
-    "province": "Alberta",
-    "country": "Canada",
-    "issue_date": "17 MAY 2018",
-    "date_of_birth": "20 NOV 1971",
-    "sex": "M",
-    "eye_color": "Brown",
-    "hair_color": "Brown",
-    "height": "182 cm",
-    "weight": "83 kg"
+    "license_number": "",
+    "first_name": "",
+    "last_name": "",
+    "street_address": "",
+    "post_code": "",
+    "city": "",
+    "province": "",
+    "country": "",
+    "issue_date": "",
+    "date_of_birth": "",
+    "sex": "",
+    "eye_color": "",
+    "hair_color": "",
+    "height": "",
+    "weight": ""
   }
 }
 ```
