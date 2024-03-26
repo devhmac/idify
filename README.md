@@ -6,11 +6,11 @@ Our 24-ish hour submission for the MovEd GovTech Hackathon.
 The topic was improving Government processes & services with technology, so we thought we'd attempt to solve the ever tedious process of manually filling out the same information on long government forms.
 Shoutout to the team [Hubert](https://github.com/linhub15), [Habib](https://github.com/habibrahmanbd), [Ian](https://github.com/ianrbaguio) & Ricky
 
+We built ID-ify, a one click button which could be imbedded into a form, enabling users to take a photo of their document/information (our example was an ID), parse the image-to-text data via an optical character recognition model, and then automatically fill in the related form fields.
+
 https://github.com/linhub15/idify/assets/10420994/b7139360-8af7-472d-a5e5-718f577fb5f5
 
-In one we built ID-ify, a one click button which could be imbedded into a form, enabling users to take a photo of their document/information (our example was an ID), parse the image-to-text data via an optical character recognition model, and then automatically fill in the related form fields.
-
-Project took a few different iterations, 
+### The Project took a few different iterations 
 - First try being a client only approach with Tesseract.js, but it proved to be unable to accurately read from our mediocre webcam image data.
 ![image](https://github.com/devhmac/idify/assets/52307383/cfb2ca49-15aa-415b-9417-b730f8f37835)
 
