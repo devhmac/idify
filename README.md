@@ -1,6 +1,6 @@
 # ID-ify - MovEd GovTech Hackathon sumbission 
 
-### Automatically fillup government forms with your id card.
+### Automatically fill government forms with your id card.
 
 Our 24-ish hour submission for the MovEd GovTech Hackathon.
 The topic was improving Government processes & services with technology, so we thought we'd attempt to solve the ever tedious process of manually filling out the same information on long government forms.
