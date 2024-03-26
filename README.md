@@ -4,6 +4,7 @@
 
 Our 24-ish hour submission for the MovEd GovTech Hackathon.
 The topic was improving Government processes & services with technology, so we thought we'd attempt to solve the ever tedious process of manually filling out the same information on long government forms.
+Shoutout to the team [Hubert](https://github.com/linhub15), [Habib](https://github.com/habibrahmanbd), [Ian](https://github.com/ianrbaguio) & Ricky
 
 https://github.com/linhub15/idify/assets/10420994/b7139360-8af7-472d-a5e5-718f577fb5f5
 
