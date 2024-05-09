@@ -8,7 +8,11 @@ Shoutout to the team [Hubert](https://github.com/linhub15), [Habib](https://gith
 
 We built ID-ify, a one click button which could be imbedded into a form, enabling users to take a photo of their document/information (our example was an ID), parse the image-to-text data via an optical character recognition model, and then automatically fill in the related form fields.
 
+### Watch a quick demo here
 https://github.com/linhub15/idify/assets/10420994/b7139360-8af7-472d-a5e5-718f577fb5f5
+
+### Or our more in depth hackathon project video
+https://www.youtube.com/watch?v=Zp26eeCPK5Y
 
 ### The Project took a few different iterations 
 - First try being a client only approach with Tesseract.js, but it proved to be unable to accurately read from our mediocre webcam image data.
